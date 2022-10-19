@@ -7,7 +7,7 @@ import utils.ScannerInput.readNextLine
 import java.lang.System.exit
 
 
-private val logger = KotlinLogging.logger {}
+private val logger  = KotlinLogging.logger {}
 
 private val noteAPI = NoteAPI()
 
