@@ -1,8 +1,11 @@
 package controllers
 
 import models.Note
+import persistence.Serializer
 
-class NoteAPI {
+class NoteAPI(serializerType: Serializer){
+
+    private var serializer: Serializer = serializerType
     private var notes = ArrayList<Note>()
 
     fun add(note: Note): Boolean {
@@ -19,6 +22,17 @@ class NoteAPI {
             }
             listOfNotes
         }
+    }
+
+    fun archiveNote(indexToArchive: Int): Boolean {
+        if (isValidIndex(indexToArchive)) {
+            val noteToArchive = notes[indexToArchive]
+            if (!noteToArchive.isNoteArchived) {
+                noteToArchive.isNoteArchived = true
+                return true
+            }
+        }
+        return false
     }
 
     fun listActiveNotes(): String {
@@ -141,4 +155,16 @@ class NoteAPI {
     fun isValidIndex(index: Int) :Boolean{
         return isValidListIndex(index, notes);
     }
+
+    @Throws(Exception::class)
+    fun load() {
+        notes = serializer.read() as ArrayList<Note>
+    }
+
+    @Throws(Exception::class)
+    fun store() {
+        serializer.write(notes)
+    }
+
+
 }
