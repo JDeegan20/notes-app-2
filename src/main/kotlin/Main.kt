@@ -21,8 +21,9 @@ fun main(args: Array<String>) {
 }
 
 
-fun mainMenu() : Int {
-    return ScannerInput.readNextInt(""" 
+fun mainMenu(): Int {
+    return readNextInt(
+        """ 
          > ----------------------------------
          > |        NOTE KEEPER APP         |
          > ----------------------------------
@@ -30,29 +31,29 @@ fun mainMenu() : Int {
          > |   1) Add a note                |
          > |   2) List all notes            |
          > |   3) Update a note             |
-         > |   4) Delete a note  
-         >      5) Archive a note  |
+         > |   4) Delete a note             |
+         > |   5) Archive a note            |
          > ----------------------------------
          > |   20) Save notes               |
          > |   21) Load notes               |
-         > ----------------------------------
          > |   0) Exit                      |
          > ----------------------------------
-         > ==>> """.trimMargin(">"))
+         > ==>> """.trimMargin(">")
+    )
 }
 fun runMenu() {
     do {
         val option = mainMenu()
         when (option) {
-            1  -> addNote()
-            2  -> listNotes()
-            3  -> updateNote()
-            4  -> deleteNote()
+            1 -> addNote()
+            2 -> listNotes()
+            3 -> updateNote()
+            4 -> deleteNote()
             5 -> archiveNote()
-            20  -> save()
-            21  -> load()
-            0  -> exitApp()
-            else -> println("Invalid option entered: ${option}")
+            20 -> save()
+            21 -> load()
+            0 -> exitApp()
+            else -> System.out.println("Invalid option entered: ${option}")
         }
     } while (true)
 }
@@ -157,7 +158,6 @@ fun archiveNote() {
         }
     }
 }
-
 
 fun save() {
     try {
