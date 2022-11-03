@@ -52,6 +52,7 @@ fun runMenu() {
             4 -> deleteNote()
             5 -> archiveNote()
             6 -> searchNotes()
+            7 -> searchByCat()
             20 -> save()
             21 -> load()
             0 -> exitApp()
@@ -106,6 +107,11 @@ fun listActiveNotes() {
 
 fun listArchivedNotes() {
     println(noteAPI.listArchivedNotes())
+}
+
+fun searchByCat(){
+    val viewCategory = readNextLine("Which category would you like to search by?")
+    println(noteAPI.listNotesBySelectedCategory(viewCategory))
 }
 
 fun updateNote() {
