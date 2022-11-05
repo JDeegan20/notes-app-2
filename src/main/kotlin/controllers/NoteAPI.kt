@@ -68,6 +68,7 @@ class NoteAPI(serializerType: Serializer){
         return notes.size
     }
 
+    //refactoring
     fun numberOfNotesByCategory(category: String): Int = notes.count { p: Note -> p.noteCategory == category}
 
     fun findNote(index: Int): Note? {
@@ -85,6 +86,7 @@ class NoteAPI(serializerType: Serializer){
     }
 
 
+    //refactoring
     fun numberOfNotesByPriority(priority: Int): Int = notes.count { p: Note -> p.notePriority == priority}
 
 
