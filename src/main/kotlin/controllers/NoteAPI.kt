@@ -46,16 +46,30 @@ class NoteAPI(serializerType: Serializer){
             else "${numberOfNotesByPriority(priority)} notes with priority $priority: $listOfNotes"
         }
 
+    fun listNotesBySelectedCategory(category: String): String =
+        if (notes.isEmpty()) "No notes stored"
+        else {
+            val listOfNotes = formatListString(notes.filter{ note -> note.noteCategory == category})
+            if (listOfNotes.equals("")) "No notes with category: $category"
+            else "${numberOfNotesByCategory(category)} notes with category $category: $listOfNotes"
+        }
 
 
+
+
+    //refactoring
     fun numberOfArchivedNotes(): Int = notes.count { note: Note -> note.isNoteArchived }
 
+    //refactoring
     fun numberOfActiveNotes(): Int = notes.count{note: Note -> !note.isNoteArchived}
 
 
     fun numberOfNotes(): Int {
         return notes.size
     }
+
+    //refactoring
+    fun numberOfNotesByCategory(category: String): Int = notes.count { p: Note -> p.noteCategory == category}
 
     fun findNote(index: Int): Note? {
         return if (isValidListIndex(index, notes)) {
@@ -72,6 +86,7 @@ class NoteAPI(serializerType: Serializer){
     }
 
 
+    //refactoring
     fun numberOfNotesByPriority(priority: Int): Int = notes.count { p: Note -> p.notePriority == priority}
 
 
